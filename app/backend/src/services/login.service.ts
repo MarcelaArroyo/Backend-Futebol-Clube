@@ -9,7 +9,7 @@ const authentication = async (login:ILogin) => {
   const user = await Users.findOne({
     where: { email },
   });
-
+  
   if(!user) return undefined;
 
   const verifyPassword = bcrypt.compareSync(password, user.password);

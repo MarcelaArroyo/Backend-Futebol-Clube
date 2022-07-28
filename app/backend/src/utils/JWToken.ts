@@ -1,11 +1,11 @@
-import * as jwt from 'jsonwebtoken';
 import 'dotenv/config';
+import * as jwt from 'jsonwebtoken';
 import IPayload from '../interfaces/payload.interface';
 
-const SECRET = process.env.JWT_SECRET || 'sdfa*(*bB7657V6$%$%463DCSSjkbhhj'
+const SECRET: string | undefined = `${process.env.JWT_SECRET}`
 
 const jwtConfig: jwt.SignOptions = {
-  expiresIn: '8h',
+  expiresIn: '1d',
   algorithm: 'HS256',
 };
 

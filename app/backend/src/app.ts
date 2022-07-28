@@ -1,4 +1,8 @@
 import * as express from 'express';
+import loginController from './controllers/login.controller';
+import httpErrorMiddleware from './middlewares/http.erro.middleware';
+import validationLogin from './middlewares/login.middleware';
+import validationToken from './middlewares/token.middleware';
 
 class App {
   public app: express.Express;
@@ -10,6 +14,9 @@ class App {
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.post('/login', validationLogin, loginController.login);
+    this.app.get('/login/validate', validationToken, loginController.loginValidate);
+    this.app.use(httpErrorMiddleware);
   }
 
   private config():void {

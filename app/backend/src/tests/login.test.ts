@@ -115,7 +115,7 @@ describe('Testando login.controller', () => {
 
     it('Retorna status 404 e mensagem "Incorrect email or password"', async () => {
       const { status, body } = await chai.request(app).post('/login').send(login);
-      expect(status).to.be.equal(404);
+      expect(status).to.be.equal(401);
       expect(body).to.be.an('object');
       expect(body).to.include.all.keys('message');
       expect(body.message).to.be.equal('Incorrect email or password');

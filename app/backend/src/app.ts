@@ -17,6 +17,7 @@ class App {
     this.app.post('/login', validationLogin, loginController.login);
     this.app.get('/login/validate', validationToken, loginController.loginValidate);
     this.app.get('/teams', teamsController.getAllTeams);
+    this.app.get('/teams/:id', teamsController.getTeamById);
   }
 
   private config():void {

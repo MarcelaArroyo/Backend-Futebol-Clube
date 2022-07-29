@@ -13,6 +13,18 @@ const getAllTeams = async (): Promise<ITeam[]> => {
   return result as ITeam[]
 }
 
+const getTeamById = async (id: number): Promise<ITeam> => {
+  const team = await Teams.findOne({
+    where: { id }
+  });
+  
+  return {
+    id: team?.id,
+    teamName: team?.team_name
+  } as ITeam
+}
+
 export default {
   getAllTeams,
+  getTeamById
 }

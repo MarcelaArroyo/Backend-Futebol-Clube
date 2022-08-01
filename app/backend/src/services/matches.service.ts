@@ -35,10 +35,22 @@ const saveMatche = async (matche: IMatche): Promise<Matches> => {
   return savedMatche;
 };
 
+const uptadeInProgress = async (id: number): Promise<[number, Matches[]]> => {
+  const result = await Matches.update({
+    inProgress: false,
+  },
+  {
+  where: { id }
+  });
+
+  return result
+};
+
 
 
 export default {
   getAllMatches,
   getMatchesByProgress,
-  saveMatche
+  saveMatche,
+  uptadeInProgress
 }

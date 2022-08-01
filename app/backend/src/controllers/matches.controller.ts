@@ -20,8 +20,20 @@ const saveMatche = async (req: Request, res: Response): Promise<Response> => {
   return res.status(201).json(savedMatche);
 }
 
+const uptadeInProgress = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params;
+  const result = await matchesService.uptadeInProgress(+id);
+
+  if (result[0] > 0) {
+    return res.status(200).json({ message: 'Finished'});
+  }
+
+  return res.status(404).json({ message: 'Not finished'});
+}
+
 export default {
   getAllMatches,
   getMatchesByProgress,
   saveMatche,
+  uptadeInProgress,
 }

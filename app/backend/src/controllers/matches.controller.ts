@@ -17,6 +17,9 @@ const getMatchesByProgress = async (req: Request, res: Response): Promise<Respon
 
 const saveMatche = async (req: Request, res: Response): Promise<Response> => {
   const savedMatche = await matchesService.saveMatche(req.body);
+
+  if (!savedMatche) return res.status(404).json({ message: 'There is no team with such id!' });
+  
   return res.status(201).json(savedMatche);
 }
 

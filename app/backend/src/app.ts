@@ -19,7 +19,9 @@ class App {
     this.app.get('/login/validate', validationToken, loginController.loginValidate);
     this.app.get('/teams', teamsController.getAllTeams);
     this.app.get('/teams/:id', teamsController.getTeamById);
-    this.app.get('/matches', matchesController.getAllTeams);
+    this.app.get('/matches', matchesController.getAllMatches);
+    // localhost:3001/matches/inProgress?q=false
+    this.app.get('/matches/inProgress', matchesController.getMatchesByProgress);
   }
 
   private config():void {

@@ -1,11 +1,21 @@
 import { Request, Response } from 'express';
 import matchesService from '../services/matches.service';
 
-const getAllTeams = async (req: Request, res: Response): Promise<Response> => {
+const getAllMatches = async (req: Request, res: Response): Promise<Response> => {
   const matches = await matchesService.getAllMatches();
   return res.status(200).json(matches);
 }
 
+const getMatchesByProgress = async (req: Request, res: Response): Promise<Response> => {
+  const { q: inProgress } = req.query
+
+  const progress = Boolean(inProgress === 'true');
+  
+  const matches = await matchesService.getMatchesByProgress(progress)
+  return res.status(200).json(matches);
+}
+
 export default {
-  getAllTeams,
+  getAllMatches,
+  getMatchesByProgress,
 }

@@ -1,6 +1,7 @@
 import * as express from 'express';
 import loginController from './controllers/login.controller';
 import teamsController from './controllers/teams.controller';
+import matchesController from './controllers/matches.controller';
 import validationLogin from './middlewares/login.middleware';
 import validationToken from './middlewares/token.middleware';
 
@@ -18,6 +19,7 @@ class App {
     this.app.get('/login/validate', validationToken, loginController.loginValidate);
     this.app.get('/teams', teamsController.getAllTeams);
     this.app.get('/teams/:id', teamsController.getTeamById);
+    this.app.get('/matches', matchesController.getAllTeams);
   }
 
   private config():void {

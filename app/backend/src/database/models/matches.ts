@@ -5,11 +5,11 @@ import Teams from './teams';
 
 class Matches extends Model {
   id!:number;
-  home_team!: number;
-  home_team_goals!:number;
-  away_team!:number;
-  away_team_goals!:number;
-  in_progress!:boolean;
+  homeTeam!: number;
+  homeTeamGoals!:number;
+  awayTeam!:number;
+  awayTeamGoals!:number;
+  inProgress!:boolean;
 }
 
 Matches.init({
@@ -19,36 +19,37 @@ Matches.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  home_team: {
+  homeTeam: {
     type: INTEGER,
     allowNull: false,
   },
-  home_team_goals: {
+  homeTeamGoals: {
     type: INTEGER,
     allowNull: false,
   },
-  away_team: {
+  awayTeam: {
     type: INTEGER,
     allowNull: false,
   },
-  away_team_goals: {
+  awayTeamGoals: {
     type: INTEGER,
     allowNull: false,
   },
-  in_progress: {
+  inProgress: {
     type: BOOLEAN,
     allowNull: false,
   }
 }, {
+  modelName: 'matches',
   underscored: true,
   sequelize: db,
   timestamps: false,
 });
 
-Teams.belongsTo(Matches, {foreignKey: 'home_team', as: 'homeTeamM'});
-Teams.belongsTo(Matches, {foreignKey: 'away_team', as: 'away_teamM'});
+Teams.hasMany(Matches, { foreignKey: 'homeTeam', as: 'teamHome' });
+Teams.hasMany(Matches, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-Matches.hasMany(Teams, {foreignKey: 'home_team', as: 'home_teamT'});
-Matches.hasMany(Teams, {foreignKey: 'away_team', as: 'away_teamT'});
+Matches.belongsTo(Teams, {foreignKey: 'homeTeam', as: 'teamHome'});
+Matches.belongsTo(Teams, {foreignKey: 'awayTeam', as: 'teamAway'});
 
 export default Matches;

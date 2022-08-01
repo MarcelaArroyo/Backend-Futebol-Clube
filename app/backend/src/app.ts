@@ -22,6 +22,7 @@ class App {
     this.app.get('/matches', matchesController.getAllMatches);
     // localhost:3001/matches/inProgress?q=false
     this.app.get('/matches/inProgress', matchesController.getMatchesByProgress);
+    this.app.post('/matches', validationToken, matchesController.saveMatche);
   }
 
   private config():void {

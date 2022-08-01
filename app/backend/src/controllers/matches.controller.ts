@@ -15,7 +15,13 @@ const getMatchesByProgress = async (req: Request, res: Response): Promise<Respon
   return res.status(200).json(matches);
 }
 
+const saveMatche = async (req: Request, res: Response): Promise<Response> => {
+  const savedMatche = await matchesService.saveMatche(req.body);
+  return res.status(201).json(savedMatche);
+}
+
 export default {
   getAllMatches,
   getMatchesByProgress,
+  saveMatche,
 }

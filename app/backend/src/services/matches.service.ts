@@ -1,5 +1,6 @@
 import Teams from '../database/models/teams';
 import Matches from '../database/models/matches';
+import IMatche from '../interfaces/matche.interface';
 
 const getAllMatches = async (): Promise<Matches[]> => {
   const matches = await Matches.findAll({
@@ -20,7 +21,24 @@ const getMatchesByProgress = async (inProgress: boolean): Promise<Matches[]> => 
   return matches;
 };
 
+const saveMatche = async (matche: IMatche): Promise<Matches> => {
+  const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = matche;
+  
+  const savedMatche = await Matches.create({
+    homeTeam,
+    homeTeamGoals,
+    awayTeam,
+    awayTeamGoals,
+    inProgress: true,
+  });
+  
+  return savedMatche;
+};
+
+
+
 export default {
   getAllMatches,
-  getMatchesByProgress
+  getMatchesByProgress,
+  saveMatche
 }

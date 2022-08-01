@@ -4,6 +4,7 @@ import teamsController from './controllers/teams.controller';
 import matchesController from './controllers/matches.controller';
 import validationLogin from './middlewares/login.middleware';
 import validationToken from './middlewares/token.middleware';
+import validationSaveMatche from './middlewares/saveMatche.middleware'
 
 class App {
   public app: express.Express;
@@ -22,7 +23,7 @@ class App {
     this.app.get('/matches', matchesController.getAllMatches);
     // localhost:3001/matches/inProgress?q=false
     this.app.get('/matches/inProgress', matchesController.getMatchesByProgress);
-    this.app.post('/matches', validationToken, matchesController.saveMatche);
+    this.app.post('/matches', validationToken, validationSaveMatche, matchesController.saveMatche);
     this.app.patch('/matches/:id/finish', matchesController.uptadeInProgress);
   }
 

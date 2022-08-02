@@ -17,13 +17,13 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', validationLogin, loginController.login);
-    this.app.get('/login/validate', validationToken, loginController.loginValidate);
+    this.app.get('/login/validate', validationToken.tokenLogin, loginController.loginValidate);
     this.app.get('/teams', teamsController.getAllTeams);
     this.app.get('/teams/:id', teamsController.getTeamById);
     this.app.get('/matches', matchesController.getAllMatches);
     // localhost:3001/matches/inProgress?q=false
     this.app.get('/matches/inProgress', matchesController.getMatchesByProgress);
-    this.app.post('/matches', validationToken, validationSaveMatche, matchesController.saveMatche);
+    this.app.post('/matches', validationToken.tokenMatches, validationSaveMatche, matchesController.saveMatche);
     this.app.patch('/matches/:id/finish', matchesController.uptadeInProgress);
   }
 

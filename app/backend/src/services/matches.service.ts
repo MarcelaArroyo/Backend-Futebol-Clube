@@ -2,6 +2,7 @@ import Teams from '../database/models/teams';
 import Matches from '../database/models/matches';
 import IMatche from '../interfaces/matche.interface';
 import { Op } from 'sequelize';
+import ITeamGoals from '../interfaces/teamGoals.interface';
 
 const getAllMatches = async (): Promise<Matches[]> => {
   const matches = await Matches.findAll({
@@ -58,11 +59,25 @@ const uptadeInProgress = async (id: number): Promise<[number, Matches[]]> => {
   return result
 };
 
+const uptadeTeamGoals = async (id: number, teamGoals: ITeamGoals): Promise<[number, Matches[]]> => {
+  const { homeTeamGoals, awayTeamGoals } = teamGoals;
+
+  const result = await Matches.update({
+    homeTeamGoals,
+    awayTeamGoals,
+  },
+  {
+  where: { id }
+  });
+
+  return result
+};
 
 
 export default {
   getAllMatches,
   getMatchesByProgress,
   saveMatche,
-  uptadeInProgress
+  uptadeInProgress,
+  uptadeTeamGoals
 }

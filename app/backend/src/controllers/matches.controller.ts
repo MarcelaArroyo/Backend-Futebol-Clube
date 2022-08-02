@@ -34,9 +34,21 @@ const uptadeInProgress = async (req: Request, res: Response): Promise<Response> 
   return res.status(404).json({ message: 'Not finished'});
 }
 
+const uptadeTeamGoals = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params;
+  const result = await matchesService.uptadeTeamGoals(+id, req.body);
+
+  if (result[0] > 0) {
+    return res.status(200).json({ message: 'Goals changed successfully'});
+  }
+
+  return res.status(404).json({ message: 'Goals changed unsuccessfully'});
+}
+
 export default {
   getAllMatches,
   getMatchesByProgress,
   saveMatche,
   uptadeInProgress,
+  uptadeTeamGoals
 }

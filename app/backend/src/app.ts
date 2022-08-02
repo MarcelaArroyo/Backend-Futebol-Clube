@@ -25,6 +25,7 @@ class App {
     this.app.get('/matches/inProgress', matchesController.getMatchesByProgress);
     this.app.post('/matches', validationToken.tokenMatches, validationSaveMatche, matchesController.saveMatche);
     this.app.patch('/matches/:id/finish', matchesController.uptadeInProgress);
+    this.app.patch('/matches/:id', matchesController.uptadeTeamGoals);
   }
 
   private config():void {

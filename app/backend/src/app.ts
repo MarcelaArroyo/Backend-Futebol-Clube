@@ -2,6 +2,7 @@ import * as express from 'express';
 import loginController from './controllers/login.controller';
 import teamsController from './controllers/teams.controller';
 import matchesController from './controllers/matches.controller';
+import leaderboardController from './controllers/leaderboard.controller';
 import validationLogin from './middlewares/login.middleware';
 import validationToken from './middlewares/token.middleware';
 import validationSaveMatche from './middlewares/saveMatche.middleware'
@@ -26,6 +27,7 @@ class App {
     this.app.post('/matches', validationToken.tokenMatches, validationSaveMatche, matchesController.saveMatche);
     this.app.patch('/matches/:id/finish', matchesController.uptadeInProgress);
     this.app.patch('/matches/:id', matchesController.uptadeTeamGoals);
+    this.app.get('/leaderboard/home', leaderboardController.learderboard);
   }
 
   private config():void {
